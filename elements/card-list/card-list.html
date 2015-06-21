@@ -1,0 +1,69 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<dom-module id="card-list">
+  <style>
+    :host {
+      display: block;
+    }
+
+    a.tile {
+      text-decoration: none;
+      text-align: center;
+      width: 150px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .card-value {
+      font-size: 60px;
+      margin: 0 auto;
+      color: black;
+    }
+
+    .cards {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    paper-material {
+      border-radius: 2px;
+      height: 100%;
+      padding: 40px 0 40px 0;
+      margin: 16px auto;
+      background: white;
+    }
+
+  </style>
+  <template>   
+    <div class="layout horizontal wrap cards">
+      <template is="dom-repeat" items="{{value}}">                   
+        <a is="app-link" class="flex-none tile" href$="{{_getHref(item, route)}}">
+          <paper-material elevation="1">
+            <span class="card-value">{{item}}</span>
+          </paper-material>
+        </a>          
+      </template>        
+    </div>       
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'card-list',
+    properties: {
+      value: Array,
+      route: String
+    },
+    _getHref: function(item, route) {
+      return '/' + route + '/' + item;
+    }
+  });
+</script>
